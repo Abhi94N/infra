@@ -1,0 +1,44 @@
+apiVersion: eksctl.io/v1alpha5
+kind: ClusterConfig
+
+metadata:
+  name: illumidesk-east-2
+  region: us-east-2
+
+
+# vpc:
+#   subnets:
+#     private:
+#       eu-north-1a: { id: subnet-0ff156e0c4a6d300c }
+#       eu-north-1b: { id: subnet-0549cdab573695c03 }
+#       eu-north-1c: { id: subnet-0426fb4a607393184 }
+iam:
+  withOIDC: true
+  serviceAccounts:
+  - metadata:
+      name: alb-ingress-controller
+      namespace: kube-system
+      labels: {app.kubernetes.io/name: "alb-ingress-controller" }
+    attachPolicyARNs: 
+    - arn:aws:iam::860100747351:policy/ALBIngressControllerIAMPolicy
+managedNodeGroups:
+  - name: ng-1
+    labels: {role: workers}
+    instanceType: t3.medium
+    minSize: 1
+    maxSize: 4
+    desiredCapacity: 2
+    volumeSize: 80
+    ssh:
+      allow: true
+      publicKeyPath: ~/Desktop/test/Jupyter_Kube/illumidesk-eks.pub
+    iam:
+      withAddonPolicies:
+        imageBuilder: true
+        autoScaler: true
+        externalDNS: true
+        albIngress: true
+        ebs: true
+        efs: true
+
+
