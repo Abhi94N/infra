@@ -25,7 +25,7 @@ spec:
           args:
             # Limit the namespace where this ALB Ingress Controller deployment will
             # resolve ingress resources. If left commented, all namespaces are used.
-            - --watch-namespace=jupyterhub
+            #- --watch-namespace=jupyterhub
 
             # Setting the ingress-class flag below ensures that only ingress resources with the
             # annotation kubernetes.io/ingress.class: "alb" are respected by the controller. You may
@@ -36,11 +36,11 @@ spec:
             # Name of your cluster. Used when naming resources created
             # by the ALB Ingress Controller, providing distinction between
             # clusters.
-            - --cluster-name=illumidesk-east-2
+            - --cluster-name=illumidesk
             
             # AWS VPC ID this ingress controller will use to create AWS resources.
             # If unspecified, it will be discovered from ec2metadata.
-            - --aws-vpc-id=vpc-003635085106f7a31
+            - --aws-vpc-id=vpc-07e9e4ffb0f537f94
 
             # AWS region this ingress controller will operate in.
             # If unspecified, it will be discovered from ec2metadata.
@@ -59,13 +59,13 @@ spec:
             # This is only here for examples. It's recommended you instead use
             # a project like kube2iam for granting access.
              - name: AWS_ACCESS_KEY_ID
-               value: AKIA4QQP74BLYHBYLUGI
+               value: AKIA4QQP74BL7MU5DBOA
 
             # AWS key secret for authenticating with the AWS API.
             # This is only here for examples. It's recommended you instead use
             # a project like kube2iam for granting access.
              - name: AWS_SECRET_ACCESS_KEY
-               value: x1uzq/6EOLQWU87cWrO/cPRX9tvdyi84dWKTcTzx
+               value: cy5P+hy8YNS3giNAPJNkmxURQLZx00kRSBgKcWVK
           # Repository location of the ALB Ingress Controller.
           image: docker.io/amazon/aws-alb-ingress-controller:v1.1.8
       serviceAccountName: alb-ingress-controller

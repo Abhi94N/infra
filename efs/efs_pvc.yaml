@@ -2,7 +2,9 @@ kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
   name: jupyter-shared-volume
+  namespace: jupyterhub
 spec:
+  volumeName: jupyterhub-shared-volume
   storageClassName: ""
   accessModes:
     - ReadWriteMany

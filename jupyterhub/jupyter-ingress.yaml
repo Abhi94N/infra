@@ -1,0 +1,21 @@
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: jupyterhub 
+  namespace: jupyterhub
+  annotations:
+    kubernetes.io/ingress.class: alb
+    alb.ingress.kubernetes.io/scheme: internet-facing
+    alb.ingress.kubernetes.io/target-type: ip
+    alb.ingress.kubernetes.io/subnets: subnet-0eb0ed92fff8d592a,subnet-0af8a3c6ced76aedd,subnet-0275722d1b3738313
+      #subnet-0eb7b025bedda5c83, subnet-01dd4852c83a7f091, subnet-0e4b38ea1e2a6f76d
+    alb.ingress.kubernetes.io/tags: Environment=dev,Team=test
+spec:
+  rules:
+  - host: hub.illumidesk.com #j=upyterhub.illumidesk.com
+    http:
+      paths:
+      - path: /*
+        backend:
+          serviceName: proxy-public
+          servicePort: 80
