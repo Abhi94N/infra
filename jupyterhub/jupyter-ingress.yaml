@@ -13,6 +13,7 @@ metadata:
 spec:
   rules:
   - host: jupyterhub.illumidesk.com
+
     http:
       paths:
       - path: /*

@@ -11,7 +11,15 @@ spec:
   persistentVolumeReclaimPolicy: Retain
   storageClassName: ""
   nfs:
+<<<<<<< HEAD
+<<<<<<< HEAD
       server: fs-b868ecc0.efs.us-east-2.amazonaws.com
+=======
+      server: fs-278a0f5f.efs.us-east-2.amazonaws.com
+>>>>>>> 5bca6c0... Initial setup of infrastructure as code setup prior to deployment automation
+=======
+      server: fs-b868ecc0.efs.us-east-2.amazonaws.com
+>>>>>>> 339746b... worked on workflow and updated readme resolved all issues except efs mount
       path: "/"
 
 
