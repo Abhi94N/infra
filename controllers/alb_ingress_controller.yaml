@@ -36,11 +36,11 @@ spec:
             # Name of your cluster. Used when naming resources created
             # by the ALB Ingress Controller, providing distinction between
             # clusters.
-            - --cluster-name=illumidesk
+            - --cluster-name=illumidesk-east
             
             # AWS VPC ID this ingress controller will use to create AWS resources.
             # If unspecified, it will be discovered from ec2metadata.
-            - --aws-vpc-id=vpc-07e9e4ffb0f537f94
+            - --aws-vpc-id=	vpc-0d062ef45cb68747f
 
             # AWS region this ingress controller will operate in.
             # If unspecified, it will be discovered from ec2metadata.
@@ -59,13 +59,13 @@ spec:
             # This is only here for examples. It's recommended you instead use
             # a project like kube2iam for granting access.
              - name: AWS_ACCESS_KEY_ID
-               value: AKIA4QQP74BL7MU5DBOA
+               value: xxxx
 
             # AWS key secret for authenticating with the AWS API.
             # This is only here for examples. It's recommended you instead use
             # a project like kube2iam for granting access.
              - name: AWS_SECRET_ACCESS_KEY
-               value: cy5P+hy8YNS3giNAPJNkmxURQLZx00kRSBgKcWVK
+               value: xxxx
           # Repository location of the ALB Ingress Controller.
           image: docker.io/amazon/aws-alb-ingress-controller:v1.1.8
       serviceAccountName: alb-ingress-controller
