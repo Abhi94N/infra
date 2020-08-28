@@ -12,7 +12,7 @@ metadata:
     alb.ingress.kubernetes.io/tags: Environment=dev,Team=test
 spec:
   rules:
-  - host: hub.illumidesk.com #j=upyterhub.illumidesk.com
+  - host: jupyterhub.illumidesk.com
     http:
       paths:
       - path: /*

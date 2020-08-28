@@ -1,5 +1,5 @@
 proxy:
-  secretToken: "a52fb2387020ac8f143fdf18ae82035b4e5be54c5641b74970792750e46d19d1"
+  secretToken: ""
   https:
     enabled: false
   service:
