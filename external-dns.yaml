@@ -49,16 +49,10 @@ spec:
       labels:
         app: external-dns
     spec:
-<<<<<<< HEAD
-<<<<<<< HEAD
+
       securityContext:
         fsGroup: 65534
-=======
->>>>>>> 5bca6c0... Initial setup of infrastructure as code setup prior to deployment automation
-=======
-      securityContext:
-        fsGroup: 65534
->>>>>>> 339746b... worked on workflow and updated readme resolved all issues except efs mount
+
       serviceAccountName: external-dns
       containers:
       - name: external-dns
@@ -70,14 +64,7 @@ spec:
         - --provider=aws
         - --policy=upsert-only # would prevent ExternalDNS from deleting any records, omit to enable full synchronization
         - --aws-zone-type=public # only look at public hosted zones (valid values are public, private or no value for both)
-<<<<<<< HEAD
-<<<<<<< HEAD
         - --registry=txt
         - --txt-owner-id=illumidesk
-=======
->>>>>>> 5bca6c0... Initial setup of infrastructure as code setup prior to deployment automation
-=======
         - --registry=txt
         - --txt-owner-id=illumidesk
->>>>>>> 339746b... worked on workflow and updated readme resolved all issues except efs mount
-
