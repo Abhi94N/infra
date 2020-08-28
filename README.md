@@ -12,7 +12,6 @@ Infrastructre as a code repo
 
 ## Installation
 
-
 ## 1) AWS Setup
 1. Install [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2.html)
 2. Use `aws configure` to configure aws CLI 
@@ -59,20 +58,17 @@ Infrastructre as a code repo
     * `helm upgrade --install $RELEASE jupyterhub/jupyterhub   --namespace $NAMESPACE --version=0.9.0   --values jupyterhub/z2jh-config.yaml`
 
 ## 4) ALB Ingress Setup
-1. Edit the _**cluster.yaml**_ file and update the **attachPolicyARNs** ARN to the ALBIngressController policy created in step 1 of ALB Ingress Setup
-2. Update the cluster
-   * `eksctl uppgrade cluster --config-file cluster.yaml --approve` 
-3. Edit the _**alb-ingress-controller.yaml**_ file under the **controllers** folder and replace the following values:
+1. Edit the _**alb-ingress-controller.yaml**_ file under the **controllers** folder and replace the following values:
    *  `--cluster-name=`
    *  `aws-vpc-id=`
    *  `--aws-region`
    *  `--cluster-name=`
    *  `AWS_ACCESS_KEY_ID`
    *  `AWS_SECRET_ACCESS_KEY`
-4. Deploy the alb ingress controller
+2. Deploy the alb ingress controller
     * `kubectl apply -f roles/rbac-role.yaml` 
     * `kubectl apply -f controllers/alb_ingress_controller.yaml`
-5. Verify the alb-ingress-controller creates resources 
+3. Verify the alb-ingress-controller creates resources 
     * `kubectl logs -n kube-system $(kubectl get po -n kube-system | egrep -o alb-ingress[a-zA-Z0-9-]+)`
             
             ----------------------------------------------------------------------------
@@ -87,23 +83,17 @@ Infrastructre as a code repo
             I0725 11:22:06.566255   16433 alb.go:80] ALB resource names will be prefixed with 2f92da62
             I0725 11:22:06.645910   16433 alb.go:163] Starting AWS ALB Ingress controller
 
-6.  Open the _**jupyter-ingress.config.yaml**_ and update the internet facing subnets in your vpc
-7.  in the console update the subnets with the following tags
+4.  Open the _**jupyter-ingress.config.yaml**_ and update the internet facing subnets in your vpc
+5.  in the console update the subnets with the following tags
     *   `kubernetes.io/cluster/$CLUSERNAME: shared`
     *   `kubernetes.io/role/internal-elb: 1 or empty`
     *   `kubernetes.io/role/elb: 1 or empty`
-8.  Create a new record by providing a hostname with a valid host zone in Route53
-9.  Run the _**jupyter-ingress.yaml**_ file
+6.  Create a new record by providing a hostname with a valid host zone in Route53
+7.  Run the _**jupyter-ingress.yaml**_ file
     * `kubectl apply -f jupyterhub/jupyter-ingress.yaml`  
-10. Verify alb-ingress-controller creates appropriate sources
+8.  Verify alb-ingress-controller creates appropriate sources
     * `kubectl logs -n kube-system $(kubectl get po -n kube-system | egrep -o 'alb-ingress[a-zA-Z0-9-]+') | grep 'jupyterhub\/jupyterhub'`
-11. Check the events of the ingress to see what events have occurred
-12. Create a new record by providing a hostname with a valid host zone in Route53
-13. Run the _**jupyter-ingress.yaml**_ file
-    * `kubectl apply -f jupyterhub/jupyter-ingress.yaml`  
-14. Verify alb-ingress-controller creates appropriate sources
-    * `kubectl logs -n kube-system $(kubectl get po -n kube-system | egrep -o 'alb-ingress[a-zA-Z0-9-]+') | grep 'jupyterhub\/jupyterhub'`
-15. Check the events of the ingress to see what events have occurred
+9.  Check the events of the ingress to see what events have occurred
     * `kubectl describe ing -n jupyterhub jupyterhub`
 
 ## 4) External DNS Setup
@@ -124,7 +114,6 @@ Infrastructre as a code repo
 3. Verify the that DNS has propogated
     * dig jupyterhub.illumidesk.com
 4. Test your url   
-
 
 ## 5) EFS Setup -- IN PROGRES
 
@@ -148,16 +137,3 @@ Infrastructre as a code repo
     * `NAMESPACE=jupyterhub`
     * `helm upgrade --install $RELEASE jupyterhub/jupyterhub   --namespace $NAMESPACE --version=0.9.0   --values jupyterhub/z2jh-config.yaml`
 10. Run `df -HT`in your notebook container to view your mount targets 
-   * ` server: fs-xxxx.efs.us-east-2.amazonaws.com`
-7.  Apply the efs persistent volume and persistent volume claim
-   * `kubectl apply -f efs/efs_pv.yaml`
-   *  `kubectl apply -f efs/efs_pvc.yaml`
-8. Open _**jupyterhub/z2jh-config.yaml**_ and update the **pvcPath** 
-   * `pvcName: "jupyter-shared-volume"` 
-9. Upgrade chart configured by _**z2jh-config.yaml**_ using the following commnad
-    * `RELEASE=jupyterhub`
-    * `NAMESPACE=jupyterhub`
-    * `helm upgrade --install $RELEASE jupyterhub/jupyterhub   --namespace $NAMESPACE --version=0.9.0   --values jupyterhub/z2jh-config.yaml`
-6. Run `df -HT` in your notebook container to view your mount targets 
-
-
