@@ -2,7 +2,7 @@ apiVersion: eksctl.io/v1alpha5
 kind: ClusterConfig
 
 metadata:
-  name: illumidesk-east
+  name: illumidesk
   region: us-east-2
 
 iam:

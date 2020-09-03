@@ -32,3 +32,8 @@ jupyterhub_cookie_secret
 #ignore pem and pub files
 *.pub
 *.pem
+secrets/config.yaml
+
+#
+.ipynb_checkpoints/*
+*.ipynb

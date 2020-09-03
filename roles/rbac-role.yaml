@@ -16,10 +16,7 @@ rules:
       - ingresses
       - ingresses/status
       - services
-<<<<<<< HEAD
       - pods/status
-=======
->>>>>>> test
     verbs:
       - create
       - get

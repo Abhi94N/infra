@@ -1,51 +1,28 @@
-proxy:
-  secretToken: ""
-  https:
-    enabled: false
-  service:
-    type: ClusterIP
-    ports:
-      nodePort: 8080
-
-
-
 hub:
   image:
     name: illumidesk/k8s-hub
     tag: latest
-  shutdownOnLogout: True
-  
-
-
+  shutdownOnLogout: true
+proxy:
+  https:
+    enabled: false
+  secretToken: ''
+  service:
+    ports:
+      nodePort: 8080
+    type: ClusterIP
 singleuser:
+  cmd: start-singleuser.sh
   extraEnv:
-    Editor: "vim"
     CHOWN_HOME: 'yes'
+    Editor: vim
+  fsGid: 0
   image:
     name: illumidesk/base-notebook
     tag: latest
-  uid: 0
-  fsGid: 0
-  cmd: "start-singleuser.sh"
   storage:
-    type: "static"
     static:
-      pvcName: "jupyter-shared-volume"
-      subPath: 'home/{username}'
-  #storage:
-    # static:
-    #   pvcName:
-    #   subPath: '{username}'
-    # capacity: 10Gi
-    # homeMountPath: /home/jovyan
-    # extraVolumes:
-    #   - name: jupyter-shared-volume
-    #     persistentVolumeClaim:
-    #       claimName: jupyter-shared-volume
-    # extraVolumeMounts:
-    #   - name: jupyter-shared-volume
-    #     mountPath: /home/joyvan
-  
-
-
-
+      pvcName: jupyter-shared-volume
+      subPath: home/{username}
+    type: static
+  uid: 0
