@@ -121,7 +121,7 @@ Infrastructre as a code repo
     * dig jupyterhub.illumidesk.com
 4. Test your url   
 
-## 5) EFS Setup -- IN PROGRES
+## 5) EFS Setup 
 
 
 1. Get the vpc using the following command
