@@ -32,6 +32,7 @@ Infrastructre as a code repo
             AWS_ACCESS_KEY_ID: ''
             AWS_SECRET_ACCESS_KEY: ''
 4.  Run the _**read_yaml.yaml**_ python script to populate the sensitive data in their respective manifest/config file
+    *  `python read_yaml.py`
 5. Open _**cluster.yaml**_ file and make apropriate edits 
 6. Run `eksctl create cluster -f cluster.yaml` to create and run cloud formation stacks that sets up your cluster and nodes and creates:
    * security groups
