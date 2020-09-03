@@ -27,7 +27,7 @@ Infrastructre as a code repo
 ## 1) EKSCTL setup
 1. Install [EKSCTL](https://github.com/weaveworks/eksctl)
 2. Install Amazon EKS Vended [KUBECTL](https://docs.aws.amazon.com/eks/latest/userguide/getting-started-eksctl.html)
-3. Create a file named _**config.yaml**_ and paste the following keys and their respective values
+3. Create a file named _**config.yaml**_ under the _**secrets**_ folder and paste the following keys and their respective values
         
             AWS_ACCESS_KEY_ID: ''
             AWS_SECRET_ACCESS_KEY: ''
