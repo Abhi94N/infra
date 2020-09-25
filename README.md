@@ -133,6 +133,7 @@ Infrastructre as a code repo
 4. Under once created add mount targets for the public cluster subnets for each availablity zone
 5. For each mount target select the `eks-cluster-sg-$clustername` security group to allow nfs access. 
    * NOTE: SG will have the following description
+     * `eks-cluster-sg-{clusterName}-#########`
      * `EKS created security group applied to ENI that is attached to EKS Control Plane master nodes, as well as any managed workloads.` 
 6. Open _**efs/efs-pv.yaml**_ and update the nfs server to match the username of your efs file system
    * ` server: fs-xxxx.efs.us-east-2.amazonaws.com`

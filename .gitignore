@@ -37,3 +37,8 @@ secrets/config.yaml
 #
 .ipynb_checkpoints/*
 *.ipynb
+
+#
+cluster/*.pem
+cluster/*.pub
+cluster/cluster-abhi.yaml

@@ -56,7 +56,8 @@ spec:
       serviceAccountName: external-dns
       containers:
       - name: external-dns
-        image: bitnami/external-dns:0.7.1
+        image: k8s.gcr.io/external-dns/external-dns:v0.7.3
+          #bitnami/external-dns:0.7.1
         args:
         - --source=service
         - --source=ingress
