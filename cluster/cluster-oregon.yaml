@@ -1,0 +1,44 @@
+apiVersion: eksctl.io/v1alpha5
+kind: ClusterConfig
+
+
+
+metadata:
+  name: illumidesk-production
+  region: us-west-2
+
+iam:
+  withOIDC: true
+
+vpc:
+  id: "vpc-0c9a1ca46360ce790"
+  subnets:
+    public:
+      us-west-2a:
+          id: "subnet-02cdc1947ed5208d3"
+      us-west-2b:
+          id: "subnet-0b35bbcc0d27d3cc3"
+      us-west-2c:
+          id: "subnet-08db919444424a786"
+      us-west-2d:
+          id: "subnet-06406c02e59f80faa"
+
+
+managedNodeGroups:
+  - name: illumidesk-production-nodes
+    labels: {role: production-node }
+    instanceType: m5.4xlarge
+    minSize: 1
+    maxSize: 4
+    desiredCapacity: 2
+    volumeSize: 200
+    ssh:
+      allow: true
+      publicKeyPath: ./illumidesk-production.pub
+    iam:
+      withAddonPolicies:
+        imageBuilder: true
+        autoScaler: true
+        externalDNS: true
+        ebs: true
+        efs: true
