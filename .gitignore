@@ -29,3 +29,12 @@ override.tf.json
 # example: *tfplan*
 venv
 .env
+*.ipynb_checkpoints
+*.pem
+*.pub
+*.sqlite
+*.ipynb
+jupyterhub_cookie_secret
+secrets/
+
+
