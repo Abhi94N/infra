@@ -29,3 +29,20 @@ override.tf.json
 # example: *tfplan*
 venv
 .env
+
+*.py[co]
+.cache
+.coverage
+.coverage.*
+.DS_Store
+*.egg-info
+.env
+.idea/
+*.ipynb
+.ipynb_checkpoints
+*.pid
+.pytest_cache
+*.retry
+.vim/
+.vscode
+hosts.*
