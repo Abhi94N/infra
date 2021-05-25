@@ -28,61 +28,9 @@ provider "kubernetes" {
   }
 }
 
-resource "kubernetes_namespace" "terramino" {
+resource "kubernetes_namespace" "illumidesk" {
   metadata {
-    name = "terramino"
+    name = var.namespace
   }
 }
 
-resource "kubernetes_deployment" "terramino" {
-  metadata {
-    name      = var.application_name
-    namespace = kubernetes_namespace.terramino.id
-    labels = {
-      app = var.application_name
-    }
-  }
-
-  spec {
-    replicas = 4
-    selector {
-      match_labels = {
-        app = var.application_name
-      }
-    }
-    template {
-      metadata {
-        labels = {
-          app = var.application_name
-        }
-      }
-      spec {
-        container {
-          image = "tr0njavolta/terramino"
-          name  = var.application_name
-        }
-      }
-    }
-  }
-}
-
-resource "kubernetes_service" "terramino" {
-  metadata {
-    name      = var.application_name
-    namespace = kubernetes_namespace.terramino.id
-  }
-  spec {
-    selector = {
-      app = kubernetes_deployment.terramino.metadata[0].labels.app
-    }
-    port {
-      port        = 8080
-      target_port = 80
-    }
-    type = "LoadBalancer"
-  }
-}
-
-locals {
-  lb_name = split(".", kubernetes_service.terramino.status.0.load_balancer.0.ingress.0.hostname)
-}
