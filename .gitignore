@@ -46,3 +46,6 @@ venv
 .vim/
 .vscode
 hosts.*
+
+*.tfvars
+*.pem

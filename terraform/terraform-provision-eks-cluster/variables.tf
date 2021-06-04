@@ -55,3 +55,20 @@ variable "private_subnet_count" {
   type        = number
   default     = 2
 }
+
+
+variable "db_name" {
+  description = "Database Name"
+  type        = string
+}
+
+variable "db_username" {
+  description = "Database administrator username"
+  type        = string
+}
+
+variable "db_password" {
+  description = "Database administrator password"
+  type        = string
+  sensitive   = true
+}

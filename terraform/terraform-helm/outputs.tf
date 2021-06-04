@@ -1,4 +1,9 @@
-# output "k8s_terramino" {
-#   description = "k8s k8s_terramino URL"
-#   value       = local.lb_name
+output "k8s_subpath" {
+  description = "k8s sub_path"
+  value       = local.extra_volume_mounts_subpath
+}
+
+# output "token" {
+#   description = "k8s token"
+#   value       = var.jupyterhub_proxy_token
 # }

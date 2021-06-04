@@ -7,15 +7,16 @@ variable "namespace" {
   default = "illumidesk"
 }
 
-variable "slack_app_token" {
-  type        = string
-  description = "Slack App Token"
-}
+# variable "slack_app_token" {
+#   type        = string
+#   description = "Slack App Token"
+# }
 
 # Jupyterhub variables
 variable "jupyterhub_debug" {
   type        = bool
   description = "Activate debug mode"
+  default     = false
 }
 
 variable "jupyterhub_proxy_token" {
@@ -47,7 +48,7 @@ variable "single_user_image" {
 variable "hub_image" {
   type        = string
   description = "Provide a hub image in the following format image:tag"
-  default     = "illumidesk/jupyterhub:latest"
+  default     = "illumidesk/jupyterhub:k8s-beta.13"
 }
 
 #Auth Variables
@@ -96,28 +97,34 @@ variable "lti_13_token_url" {
 variable "oidc_client_id" {
   type        = string
   description = "OIDC Client ID"
+  default     = ""
 }
 variable "oidc_client_secret" {
   type        = string
   description = "OIDC Client Secret"
+  default     = ""
 }
 variable "oidc_callback_url" {
   type        = string
   description = "OIDC Callback URL"
+  default     = ""
 }
 
 variable "oidc_authorize_url" {
   type        = string
   description = "OIDC Authorize URL"
+  default     = ""
 }
 
 variable "oidc_token_url" {
   type        = string
   description = "OIDC Token URL"
+  default     = ""
 }
 variable "oidc_userdata_url" {
   type        = string
   description = "OIDC Userdata URL"
+  default     = ""
 }
 
 ##Postgres Variables

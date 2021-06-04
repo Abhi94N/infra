@@ -10,30 +10,30 @@ provider "helm" {
   }
 }
 
-resource "helm_release" "kubewatch" {
-  name       = "kubewatch"
-  repository = "https://charts.bitnami.com/bitnami"
-  chart      = "kubewatch"
+# resource "helm_release" "kubewatch" {
+#   name       = "kubewatch"
+#   repository = "https://charts.bitnami.com/bitnami"
+#   chart      = "kubewatch"
 
-  values = [
-    file("${path.module}/kubewatch-values.yaml")
-  ]
+#   values = [
+#     file("${path.module}/kubewatch-values.yaml")
+#   ]
 
-  set_sensitive {
-    name  = "slack.token"
-    value = var.slack_app_token
-  }
-}
+#   set_sensitive {
+#     name  = "slack.token"
+#     value = var.slack_app_token
+#   }
+# }
 
 locals {
-  single_user_pvc             = format("shared-pvc-, %s", var.namespace)
-  single_user_pvc_subpath     = format("%s, /home/{username}", var.namespace)
-  extra_volume_mounts_subpath = format("%s, /exchange/", var.namespace)
+  single_user_pvc             = format("shared-pvc-%s", var.namespace)
+  single_user_pvc_subpath     = format("%s/home/{username}", var.namespace)
+  extra_volume_mounts_subpath = format("%s/exchange/", var.namespace)
 }
 resource "helm_release" "illumidesk-stack" {
   name       = "illumidesk-stack"
   repository = "https://illumidesk.github.io/helm-chart/"
-  chart      = "illumidesk/illumidesk"
+  chart      = "illumidesk"
   version    = "3.2.0"
 
   values = [
@@ -69,10 +69,10 @@ resource "helm_release" "illumidesk-stack" {
     name  = "jupyterhub.singleuser.storage.subPath"
     value = local.single_user_pvc_subpath
   }
-  set {
-    name  = "jupyterhub.singleuser.storage.extraVolumeMounts[0].subPath"
-    value = local.extra_volume_mounts_subpath
-  }
+  # set {
+  #   name  = "jupyterhub.singleuser.storage.extraVolumeMounts[0].subPath"
+  #   value = local.extra_volume_mounts_subpath
+  # }
 
   set {
     name  = "jupyterhub.singleuser.image.name"
@@ -147,7 +147,7 @@ resource "helm_release" "illumidesk-stack" {
   }
   set {
     name  = "jupyterhub.hub.extraEnv.POSTGRES_NBGRADER_USER"
-    value = var.postgres_user
+    value = data.terraform_remote_state.[]
   }
   set {
     name  = "jupyterhub.hub.extraEnv.POSTGRES_NBGRADER_PASSWORD"
